@@ -16,7 +16,7 @@ function iniciarScanner() {
 
         scanning = true;
 
-        // 🔥 PRIMER INTENTO: forzar cámara trasera
+        // PRIMER INTENTO: forzar cámara trasera
         html5QrCode.start(
             { facingMode: "environment" }, // 👈 clave
             {
@@ -26,7 +26,7 @@ function iniciarScanner() {
             onScanSuccess
         ).catch(() => {
 
-            // 🔁 FALLBACK: buscar cámara trasera manualmente
+            // FALLBACK: buscar cámara trasera manualmente
             let cameraId = devices[0].id;
 
             for (let i = 0; i < devices.length; i++) {
@@ -65,7 +65,7 @@ function onScanSuccess(decodedText) {
 
     scanning = false;
 
-    // 🔴 DETENER ESCÁNER
+    // DETENER ESCÁNER
     html5QrCode.stop().then(() => {
 
         mensaje.innerHTML = "🔍 Código: " + decodedText;

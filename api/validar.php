@@ -1,5 +1,5 @@
 <?php
-// 🔥 Mostrar errores (solo para pruebas)
+// Mostrar errores (solo para pruebas)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -23,7 +23,7 @@ if (!isset($data["codigo"])) {
 // limpiar código (evita errores por espacios)
 $codigo = trim($data["codigo"]);
 
-// 🔥 IMPORTANTE: tu columna es "id"
+// columna es "id"
 $stmt = $conn->prepare("SELECT * FROM empleados WHERE id = ?");
 $stmt->bind_param("s", $codigo);
 $stmt->execute();

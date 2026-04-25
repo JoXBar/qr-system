@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "qr-system"; // tu base de datos
+$db   = "qr-system"; // base de datos
 
 $conn = new mysqli($host, $user, $pass, $db);
 
