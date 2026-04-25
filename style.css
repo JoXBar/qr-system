@@ -1,0 +1,29 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+#reader {
+    width: 300px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#resultado {
+    margin-top: 20px;
+}
+
+.ok {
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 10px;
+}
