@@ -5,56 +5,32 @@ const mensaje = document.getElementById("mensaje");
 
 // iniciar scanner
 function iniciarScanner() {
+
+    if (scanning) return;
+
     html5QrCode = new Html5Qrcode("reader");
 
     Html5Qrcode.getCameras().then(devices => {
 
         if (!devices.length) {
-            mensaje.innerHTML = "❌ No hay cámara";
+            mensaje.innerHTML = "No hay cámara";
             return;
         }
 
         scanning = true;
+        mensaje.innerHTML = "Escaneando...";
 
-        // PRIMER INTENTO: forzar cámara trasera
         html5QrCode.start(
-            { facingMode: "environment" }, // 👈 clave
+            { facingMode: "environment" },
             {
                 fps: 10,
                 qrbox: { width: 250, height: 250 }
             },
             onScanSuccess
-        ).catch(() => {
-
-            // FALLBACK: buscar cámara trasera manualmente
-            let cameraId = devices[0].id;
-
-            for (let i = 0; i < devices.length; i++) {
-                const label = devices[i].label.toLowerCase();
-
-                if (
-                    label.includes("back") ||
-                    label.includes("rear") ||
-                    label.includes("environment")
-                ) {
-                    cameraId = devices[i].id;
-                    break;
-                }
-            }
-
-            html5QrCode.start(
-                cameraId,
-                {
-                    fps: 10,
-                    qrbox: { width: 250, height: 250 }
-                },
-                onScanSuccess
-            );
-        });
+        );
 
     }).catch(err => {
-        mensaje.innerHTML = "❌ Error cámara: " + err;
-        console.error(err);
+        mensaje.innerHTML = "Error cámara: " + err;
     });
 }
 
@@ -81,22 +57,22 @@ function onScanSuccess(decodedText) {
         .then(data => {
 
             if (data.valido) {
-                mensaje.innerHTML = `
-                    <div class="ok">
-                    ✅ ACCESO PERMITIDO<br><br>
-                    👤 ${data.nombre}<br>
-                    🚗 ${data.vehiculo}<br>
-                    🔢 ${data.placa}
-                    </div>
-                `;
-            } else {
-                mensaje.innerHTML = `
-                    <div class="error">
-                    ❌ ACCESO DENEGADO<br>
-                    ${data.motivo ?? ""}
-                    </div>
-                `;
-            }
+    mensaje.innerHTML = `
+        <div class="result-card ok">
+            <div class="title">ACCESO PERMITIDO</div>
+            <div class="line">${data.nombre}</div>
+            <div class="line">${data.vehiculo}</div>
+            <div class="line">${data.placa}</div>
+        </div>
+    `;
+} else {
+    mensaje.innerHTML = `
+        <div class="result-card error">
+            <div class="title">ACCESO DENEGADO</div>
+            <div class="line">${data.motivo ?? ""}</div>
+        </div>
+    `;
+}
 
             // botón para siguiente escaneo
             mensaje.innerHTML += `
@@ -111,9 +87,15 @@ function onScanSuccess(decodedText) {
 
 // reiniciar scanner
 function reiniciarScanner() {
-    mensaje.innerHTML = "📷 Escaneando...";
+    mensaje.innerHTML = "Escaneando...";
     iniciarScanner();
 }
 
-// iniciar al cargar
-iniciarScanner();
+function detenerScanner() {
+    if (html5QrCode && scanning) {
+        html5QrCode.stop().then(() => {
+            scanning = false;
+            mensaje.innerHTML = "Escaneo detenido";
+        });
+    }
+}

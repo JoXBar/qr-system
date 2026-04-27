@@ -1,29 +1,117 @@
 body {
-    font-family: Arial;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    background: #f4f4f4;
 }
 
-#reader {
-    width: 300px;
+.container {
+    max-width: 400px;
     margin: auto;
-    margin-top: 20px;
+    padding: 20px;
 }
 
+/* botón login */
+.login-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #111;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.line {
+    font-size: 15px;
+    margin: 4px 0;
+    font-weight: 400;
+}
+
+/* contenedor general */
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* título */
+h2 {
+    margin-top: 40px;
+    font-weight: 600;
+}
+
+/* botones */
+button {
+    padding: 12px 18px;
+    margin: 10px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* scanner */
+#reader {
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+}
+
+/* 🔥 clave */
+#reader video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+}
+/* resultado contenedor */
 #resultado {
     margin-top: 20px;
 }
 
-.ok {
-    background: #d4edda;
-    color: #155724;
-    padding: 15px;
-    border-radius: 10px;
+/* tarjeta resultado */
+.result-card {
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    animation: fadeIn 0.3s ease;
 }
 
+/* éxito */
+.ok {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* error */
 .error {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 15px;
-    border-radius: 10px;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* animación */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
